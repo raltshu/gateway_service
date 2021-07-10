@@ -6,10 +6,10 @@ class HomeView(FlaskView):
     def index(self):
         #TODO: Data service get first 20 lines for display
         print('Hello')
-        return render_template('main.html')
+        return render_template('home/list.html')
     
-    @route('/predict', methods=['GET'])
-    def predict_view(self):
-        return render_template('predict.html')
+    # @route('/predict', methods=['GET'])
+    # def predict_view(self):
+    #     return render_template('predict.html')
 
 
