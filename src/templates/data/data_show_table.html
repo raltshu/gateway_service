@@ -1,0 +1,20 @@
+{% extends 'data/data_main.html' %} 
+
+  {% block data_content %}
+    <style>
+        table {text-align: left;}
+        table thead th {text-align: left;}
+    </style>
+  <center>
+    {{data_table.to_html(index=False, classes=["table-bordered", "table-striped", "table-hover"]) | safe}}
+    <form class="form-inline" action="/data/show_table/{{table_name}}" method="GET">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="limit" class="form-label">Rows Limit</label>
+            <input type="text" class="form-control" id="limit" name="limit" value="{{limit}}">
+        
+            <button type="submit" class="btn btn-primary">Reload</button>
+        </div>
+    </form>
+  </center>
+
+  {% endblock %}  
