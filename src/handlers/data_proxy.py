@@ -10,7 +10,6 @@ class DataView(FlaskView):
 
     @route('/', methods=['GET'])
     def index(self):
-        #TODO: Data service get first 20 lines for display
         response = requests.get(url=f"{dataservice}/data/table_view/diamonds_org?limit=10")
         df = pd.read_json(response.text)
         return render_template('data/data_show_table.html', data_table = df, table_name='diamonds_org', limit=10)
