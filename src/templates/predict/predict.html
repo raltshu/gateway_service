@@ -1,36 +1,115 @@
 {% extends 'main.html' %} 
 
 {% block content %}
-<form style="margin-left: 5%;margin-right: 5%;" action="/predict/" method="POST">
-    <div class="mb-3">
-      <label for="area" class="form-label">Area</label>
-      <input type="text" class="form-control" id="area" name="area">
-    </div>
-    <div class="mb-3">
-      <label for="rooms" class="form-label">Rooms</label>
-      <input type="text" class="form-control" id="rooms" name="rooms">
-    </div>
-    <div class="mb-3">
-        <label for="floor" class="form-label">Floor</label>
-        <input type="text" class="form-control" id="floor" name="floor">
+<div class="col d-flex align-items-start" style="margin-left: 5%;margin-right: 5%;">
+  <div>
+    <p>
+      <b>Model State</b> <span style="color:green"><b> {{state.state.capitalize()}}</b></span>
+      <b>Score</b> {{ "{:,.2f}".format(state.test_score) }} 
+      <b>RMSE</b> {{ "${:,.2f}".format(state.rmse) }} 
+      <b>RMSPE</b> {{ "{:,.2f}%".format(state.rmspe) }} 
+      <b>Last Updated</b> {{ state['update'] }}</p>
+  </div>
+</div>
+<form class="form-floating" style="margin-left: 5%;margin-right: 5%;" action="/predict/" method="POST">
+    <h3>Submit Your Prediction</h3>
+    <div class="row g-1">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <output class="form-label">Carat 0.8</output>
+          <input type="range" class="form-range" value="0.8" min="0.2" max="3.24" step="0.01" 
+            id="carat" name="carat" oninput="this.previousElementSibling.value = 'Carat ' +this.value">          
+        </div>
       </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="elevator" name="elev">
-      <label class="form-check-label" for="elevator">Elevator</label>
-    </div>
-    <div class="mb-3">
-        <label for="park" class="form-label">Parkings</label>
-        <input type="text" class="form-control" id="park" name="park">
+      <div class="w-100"></div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <output>Depth 61</output>
+          <input type="range" class="form-range" value="61" min="43" max="79" step="0.1" 
+            id="depth" name="depth" oninput="this.previousElementSibling.value = 'Depth '+this.value">    
+        </div>
       </div>
-      <div class="mb-3">
-        <select class="form-select mb-3" aria-label="Default select example" name="btype">
-            <option selected>Open this select menu</option>
-            <option value="1">בית משותף</option>
-            <option value="2">דו משפחתי</option>
-         <option value="3">בית פרטי</option>
-        </select>
+      <div class="w-100"></div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <output>Table 57</output>
+          <input type="range" class="form-range" value="57" min="43" max="95" step="0.1" 
+            id="table" name="table" oninput="this.previousElementSibling.value = 'Table '+this.value">
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <select class="form-select" aria-label="cut select" name="cut" id="cut">
+                <option selected>Open this select menu</option>
+                <option value="Ideal">Ideal</option>
+                <option value="Premium">Premium</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+          </select>
+          <label for="cut">Choose Cut</label>
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <select class="form-select" aria-label="color select" name="color" id="color">
+                <option selected>Open this select menu</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
+                <option value="J">J</option>
+          </select>
+          <label for="color">Choose Color</label>
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <select class="form-select" aria-label="clarity select" name="clarity" id="clarity">
+                <option selected>Open this select menu</option>
+                <option value="IF">IF</option>
+                <option value="VVS1">VVS1</option>
+                <option value="VVS2">VVS2</option>
+                <option value="VS1">VS1</option>
+                <option value="VS2">VS2</option>
+                <option value="SI1">SI1</option>
+                <option value="SI2">SI2</option>
+                <option value="I1">I1</option>
+          </select>
+          <label for="clarity">Choose Clarity</label>
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-sm-2">
+        <div class="form-floating">
+          <output>X 5.73</output>
+          <input type="range" class="form-range" value="5.73" min="3.73" max="9.54" step="0.01" 
+            id="x" name="x" oninput="this.previousElementSibling.value = 'X '+this.value">
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-floating col">
+          <output>Y 5.73</output>        
+          <input type="range" class="form-range" value="5.73" min="3.68" max="9.46" step="0.01" 
+            id="y" name="y" oninput="this.previousElementSibling.value = 'Y '+this.value">
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-floating col">
+          <output>Z 3.53</output>        
+          <input type="range" class="form-range" value="3.53" min="2.06" max="5.98" step="0.01" 
+            id="z" name="z" oninput="this.previousElementSibling.value = 'Z '+this.value">
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-primary">Predict</button>
+      </div>
     </div>
-      
-    <button type="submit" class="btn btn-primary">Predict</button>
   </form>
   {% endblock %} 

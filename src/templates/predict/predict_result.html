@@ -1,0 +1,66 @@
+{% extends 'main.html' %} 
+
+{% block content %}
+<div class="col d-flex align-items-start" style="margin-left: 5%;margin-right: 5%;">
+
+  <p class="h2">Your prediction is ${{"{:,.2f}".format(predicted_price)}}</p>
+ 
+  <p class="h5">For the below data that was submitted:</p>
+
+  <div class="form-group row">
+    <label for="carat" class="col-sm-2 col-form-label">Carat</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="carat" value="{{ data['carat'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="depth" class="col-sm-2 col-form-label">Depth</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="depth" value="{{ data['depth'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="table" class="col-sm-2 col-form-label">Table</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="table" value="{{ data['table'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="cut" class="col-sm-2 col-form-label">Cut</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="cut" value="{{ data['cut'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="color" class="col-sm-2 col-form-label">Color</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="color" value="{{ data['color'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="clarity" class="col-sm-2 col-form-label">Clarity</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="clarity" value="{{ data['clarity'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="x" class="col-sm-2 col-form-label">X</label>
+    <div class="col-sm-10">
+      <input type="x" readonly class="form-control-plaintext" id="x" value="{{ data['x'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="y" class="col-sm-2 col-form-label">Y</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="y" value="{{ data['y'] }}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="z" class="col-sm-2 col-form-label">Z</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="z" value="{{ data['z'] }}">
+    </div>
+  </div>
+
+</div>  
+{% endblock %} 

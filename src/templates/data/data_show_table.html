@@ -5,16 +5,27 @@
         table {text-align: left;}
         table thead th {text-align: left;}
     </style>
-  <center>
-    {{data_table.to_html(index=False, classes=["table-bordered", "table-striped", "table-hover"]) | safe}}
-    <form class="form-inline" action="/data/show_table/{{table_name}}" method="GET">
-        <div class="form-group mx-sm-3 mb-2">
+  
+    <form class="form-floating" style="margin-left: 5%;margin-right: 5%;"
+       action="/data/show_table/{{table_name}}" method="GET">
+       <div class="row g-1">
+        <div class="w-100"></div>
+        <div class="col-lg-auto">
+         {{data_table.to_html(index=False, classes=["table-bordered", "table-striped", "table-hover"]) | safe}}
+        </div>
+        <div class="w-100"></div>
+        <div class="col-sm-2">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="limit" name="limit" value="{{limit}}"
+              placeholder="10">
             <label for="limit" class="form-label">Rows Limit</label>
-            <input type="text" class="form-control" id="limit" name="limit" value="{{limit}}">
-        
+          </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-sm-2">
             <button type="submit" class="btn btn-primary">Reload</button>
         </div>
+      </div>
     </form>
-  </center>
 
   {% endblock %}  
