@@ -30,6 +30,6 @@ class PredictView(FlaskView):
         }
         response = requests.post(url=f"{fitservice}/fit/predict", json=row)  
 
-        return render_template('predict/predict_result.html' ,predicted_price=response.text, data=row)
+        return render_template('predict/predict_result.html' ,predicted_price=float(response.text), data=row)
 
 
