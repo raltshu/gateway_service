@@ -8,10 +8,8 @@ dataservice = os.environ['dataservice_endpoint']
 class HomeView(FlaskView):
 
     def index(self):
-        #TODO: Data service get first 20 lines for display
-        response = requests.get(url=f"{dataservice}/data/table_view/diamonds_org?limit=10")
-        print('Hello')
-        return render_template('home/list.html', data=response.text)
+    
+        return render_template('home/list.html')
     
     # @route('/predict', methods=['GET'])
     # def predict_view(self):

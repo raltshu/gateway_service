@@ -1,23 +1,24 @@
 {% extends 'main.html' %} 
 
   {% block content %}
-  <h1>List: {{data}}</h1>
-
-  <table class="table" style="text-align: center;">
-    <thead>
-      <tr>
-        <th scope="col">Area</th>
-        <th scope="col">Rooms</th>
-        <th scope="col">Price</th>
-        <th scope="col">Deatils</th>
-      </tr>
-    </thead>
-    <tbody>
-
-        
-      
-    </tbody>
-  </table>
+  <div  style="margin-left: 5%;margin-right: 5%;">
+    <br/>
+  <h2><span style="font-family: 'comic sans ms', sans-serif;">🎵Shine Bright Like a Diamond...</span></h2>
+  <p>This site allows you to predict a price a daimond based on a set of given features.</p>
+  <p>It is based on the Seaborn's Diamonds dataset.</p>
+  <p>The prediction model, research and conclusion can be reviewed on my <em><strong>Goolge Collab Notebook</strong></em> <a href="https://colab.research.google.com/drive/13fOUn45fhcuYu_cL44rCvLIOId8DHefY?usp=sharing">here&nbsp;</a></p>
+  <p>In a nutshell the model is mainly based on RandomForest Regressor, however in an effort to reduce the RMSPE I cretaed few models based on the diamond's cut and then combined the result with an overall regression mode to get the best results.</p>
+  <p>Here is some explanation about the features by which price is predicted:</p>
+  <ol>
+  <li><strong>X,Y,Z</strong> - are the diamonds' dimensions</li>
+  <li><strong>Carat </strong>- is the diamond's carat</li>
+  <li><strong>Table and Depth</strong> - are best illustrated by the following figure&nbsp;<img src="https://gailab.org/images/diamond-anatomy1.png" width="360" height="215" alt="Diamond Anatomy" /></li>
+  <li><strong>Color</strong> -&nbsp;<img src="https://gailab.org/images/diamond-color-chart.jpg" width="1062" height="123" alt="" /><br /><br /></li>
+  <li><strong>Clarity </strong>-&nbsp;<img src="https://gailab.org/images/diamond-clarity-chart.jpg" width="855" height="288" alt="" /></li>
+  <li><strong>Cut</strong> - The diamond's cut quality ranging from <em>Ideal &gt; Premium &gt; Very Good &gt; Good &gt; Fair</em></li>
+  </ol>
+  <p><em>Go to the 'Precit' tab and submit your observations</em></p>
+  </div>
   {% endblock %}  
 
 
