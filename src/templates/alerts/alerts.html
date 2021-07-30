@@ -1,0 +1,33 @@
+{% extends 'main.html' %} 
+
+  {% block content %}
+    <style>
+        table {text-align: left;}
+        table thead th {text-align: left;}
+    </style>
+  
+    <form class="form-floating" style="margin-left: 5%;margin-right: 5%;"
+       action="/alerts/show_table/{{table_name}}" method="GET">
+       <div class="row g-1">
+        <div class="w-100"></div>
+        <div class="col-lg-auto">
+         {{data_table.to_html(index=False, classes=["table-bordered", "table-striped", "table-hover"]) | safe}}
+        </div>
+        <div class="w-100"></div>
+        <div class="col-sm-2">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="limit" name="limit" value="{{limit}}"
+              placeholder="10">
+            <label for="limit" class="form-label">Rows Limit</label>
+          </div>
+        </div>
+        <input type="hidden" value="{{order_by}}" name="order_by">
+        <input type="hidden" value="{{order_asc_desc}}" name="order_asc_desc">
+        <div class="w-100"></div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Reload</button>
+        </div>
+      </div>
+    </form>
+
+  {% endblock %}  

@@ -1,0 +1,26 @@
+{% extends 'main.html' %} 
+
+{% block content %}
+<br/><br/>
+<form class="form-floating" style="margin-left: 5%;margin-right: 5%;"
+       action="/admin/action" method="POST">
+    <div class="w-100"></div>
+    <div class="col-md-6">
+        <div class="form-floating">
+          <select class="form-select" aria-label="action target select" name="action_target" id="action_target">
+                <option selected>Open this select menu</option>
+                {% for action_target,action_label in actions %}
+                <option value="{{action_target}}">{{action_label}}</option>
+                {% endfor %}
+          </select>
+          <label for="action_target">Choose Action</label>
+        </div>
+      </div>
+    <div class="w-100"></div>
+    <br/>
+    <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+</form>
+{% endblock %}

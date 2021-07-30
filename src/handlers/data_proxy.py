@@ -23,8 +23,5 @@ class DataView(FlaskView):
         df = pd.read_json(response.text)
         return render_template('data/data_show_table.html', data_table = df, 
             table_name=table_name, limit=limit, order_by=order_by, order_asc_desc=order_asc_desc)  
-    # @route('/', methods=['POST'])
-    # def submit_prediction(self):
-    #     return render_template('predict/predict.html')
-
+    
 
