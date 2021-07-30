@@ -17,9 +17,12 @@ class DataView(FlaskView):
     @route('/show_table/<string:table_name>', methods=['GET'])
     def show_table(self, table_name):
         limit = request.args.get('limit')
-        response = requests.get(url=f"{dataservice}/data/table_view/{table_name}?limit={limit}")  
+        order_by = request.args.get('order_by')
+        order_asc_desc = request.args.get('order_asc_desc')
+        response = requests.get(url=f"{dataservice}/data/table_view/{table_name}?limit={limit}&order_by={order_by}&order_asc_desc={order_asc_desc}")  
         df = pd.read_json(response.text)
-        return render_template('data/data_show_table.html', data_table = df, table_name=table_name, limit=limit)  
+        return render_template('data/data_show_table.html', data_table = df, 
+            table_name=table_name, limit=limit, order_by=order_by, order_asc_desc=order_asc_desc)  
     # @route('/', methods=['POST'])
     # def submit_prediction(self):
     #     return render_template('predict/predict.html')

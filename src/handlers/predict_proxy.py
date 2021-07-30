@@ -4,6 +4,7 @@ from flask import request,render_template
 import requests
 
 fitservice = os.environ['fitservice_endpoint']
+dataservice = os.environ['dataservice_endpoint']
 
 
 class PredictView(FlaskView):
@@ -28,8 +29,19 @@ class PredictView(FlaskView):
             'y':request.form["y"],
             'z':request.form["z"]
         }
-        response = requests.post(url=f"{fitservice}/fit/predict", json=row)  
+        response = requests.post(url=f"{fitservice}/fit/predict", json=row) 
+        row['predicted_price'] = float(response.text)
+        audit_response = requests.post(url=f"{dataservice}/data/audit", json=row)
 
-        return render_template('predict/predict_result.html' ,predicted_price=float(response.text), data=row)
+        return render_template('predict/predict_result.html' ,predicted_price=float(response.text), data=row, row_id=int(audit_response.text))
+
+    @route('/feedback/<int:row_id>', methods=['POST','PUT'])
+    def user_feedback(self, row_id):
+        grade = request.form['grade']
+        user_prediction = request.form['user_prediction']
+        data = {'grade':grade,'user_prediction':user_prediction}
+        response = requests.put(url=f"{dataservice}/data/feedback/{row_id}", json=data)
+
+        return render_template('predict/feedback_thank_you.html')
 
 

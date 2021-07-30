@@ -80,7 +80,37 @@
     </div>
   </div>
   <div class="w-100"></div>
-
+  <br/><br/>
+  <form class="form-floating" style="margin-left: 5%;margin-right: 5%;" 
+      action="/predict/feedback/{{row_id}}" method="POST">
+    <div class="row g-1">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <select class="form-select" aria-label="grade select" name="grade" id="grade">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3" selected>3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+          </select>
+          <label for="grade">Prediction Grade</label>
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="user_prediction" name="user_prediction"
+             value="{{'{:,.2f}'.format(predicted_price)}}"
+              placeholder="{{'{:,.2f}'.format(predicted_price)}}">
+          <label for="limit" class="form-label">What is your estimate?</label>
+        </div>
+      </div>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-primary">Submit your feedback</button>
+    </div>
+  </form>
 
 </div>  
 {% endblock %} 
