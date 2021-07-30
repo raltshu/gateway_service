@@ -10,6 +10,7 @@ class AdminView(FlaskView):
     def index(self):
         actions = (
             (f'{fitservice}/fit/train_model','Train Main Model'),
+            (f'{fitservice}/fit/calc_score','Calculate Main Model Score')
         )
         return render_template('admin/admin.html', actions=actions)
     
