@@ -3,113 +3,129 @@
 {% block content %}
 <div class="row d-flex align-items-start" style="margin-left: 5%;margin-right: 5%;">
 
-  <p class="h2">Your prediction is ${{"{:,.2f}".format(predicted_price)}}</p>
+  <p class="h2">Your prediction is ${{"{:,.2f}".format(form.model_prediction.data)}}</p>
   <div class="w-100"></div>
 
   <p class="h5">For the below data that was submitted:</p>
   <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="carat" class="col-sm-1 col-form-label"><strong>Carat</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="carat" value="{{ data['carat'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="depth" class="col-sm-1 col-form-label"><strong>Depth</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="depth" value="{{ data['depth'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="table" class="col-sm-1 col-form-label"><strong>Table</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="table" value="{{ data['table'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="cut" class="col-sm-1 col-form-label"><strong>Cut</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="cut" value="{{ data['cut'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="color" class="col-sm-1 col-form-label"><strong>Color</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="color" value="{{ data['color'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="clarity" class="col-sm-1 col-form-label"><strong>Clarity</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="clarity" value="{{ data['clarity'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="x" class="col-sm-1 col-form-label"><strong>X</strong></label>
-    <div class="col-sm-2">
-      <input type="x" readonly class="form-control-plaintext" id="x" value="{{ data['x'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="y" class="col-sm-1 col-form-label"><strong>Y</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="y" value="{{ data['y'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-
-  <div class="form-group row">
-    <label for="z" class="col-sm-1 col-form-label"><strong>Z</strong></label>
-    <div class="col-sm-2">
-      <input type="text" readonly class="form-control-plaintext" id="z" value="{{ data['z'] }}">
-    </div>
-  </div>
-  <div class="w-100"></div>
-  <br/><br/>
   <form class="form-floating" style="margin-left: 5%;margin-right: 5%;" 
-      action="/predict/feedback/{{row_id}}" method="POST">
-    <div class="row g-1">
-      <div class="col-md-6">
-        <div class="form-floating">
-          <select class="form-select" aria-label="grade select" name="grade" id="grade">
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3" selected>3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
-          </select>
-          <label for="grade">Prediction Grade</label>
-        </div>
-      </div>
-      <div class="w-100"></div>
-      <div class="col-md-6">
-        <div class="form-floating">
-          <input type="text" class="form-control" id="user_prediction" name="user_prediction"
-             value="{{'{:,.2f}'.format(predicted_price)}}"
-              placeholder="{{'{:,.2f}'.format(predicted_price)}}">
-          <label for="limit" class="form-label">What is your estimate?</label>
-        </div>
+  action="/predict/feedback/{{row_id}}" method="POST">
+  <input type="hidden" name="{{form.model_prediction.id}}" value="{{form.model_prediction.data}}"/>
+    <div class="form-group row">
+      <label for="carat" class="col-sm-1 col-form-label"><strong>Carat</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="carat" name="carat" value="{{ form.carat.data }}">
       </div>
     </div>
     <div class="w-100"></div>
-    <div class="col-sm-2">
-      <button type="submit" class="btn btn-primary">Submit your feedback</button>
+
+    <div class="form-group row">
+      <label for="depth" class="col-sm-1 col-form-label"><strong>Depth</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="depth" name="depth" value="{{ form.depth.data }}">
+      </div>
     </div>
+    <div class="w-100"></div>
+
+    <div class="form-group row">
+      <label for="table" class="col-sm-1 col-form-label"><strong>Table</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="table" name="table" value="{{ form.table.data }}">
+      </div>
+    </div>
+    <div class="w-100"></div>
+
+    <div class="form-group row">
+      <label for="cut" class="col-sm-1 col-form-label"><strong>Cut</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="cut" name="cut" value="{{ form.cut.data }}">
+      </div>
+    </div>
+    <div class="w-100"></div>
+
+    <div class="form-group row">
+      <label for="color" class="col-sm-1 col-form-label"><strong>Color</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="color" name="color" value="{{ form.color.data }}">
+      </div>
+    </div>
+    <div class="w-100"></div>
+
+    <div class="form-group row">
+      <label for="clarity" class="col-sm-1 col-form-label"><strong>Clarity</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="clarity" name="clarity" value="{{ form.clarity.data }}">
+      </div>
+    </div>
+    <div class="w-100"></div>
+
+    <div class="form-group row">
+      <label for="x" class="col-sm-1 col-form-label"><strong>X</strong></label>
+      <div class="col-sm-2">
+        <input type="x" readonly class="form-control-plaintext" id="x" name="x" value="{{ form.x.data }}">
+      </div>
+    </div>
+    <div class="w-100"></div>
+
+    <div class="form-group row">
+      <label for="y" class="col-sm-1 col-form-label"><strong>Y</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="y" name="y" value="{{ form.y.data }}">
+      </div>
+    </div>
+    <div class="w-100"></div>
+
+    <div class="form-group row">
+      <label for="z" class="col-sm-1 col-form-label"><strong>Z</strong></label>
+      <div class="col-sm-2">
+        <input type="text" readonly class="form-control-plaintext" id="z" name="z" value="{{ form.z.data }}">
+      </div>
+    </div>
+    <div class="w-100"></div>
+    <br/><br/>
+      <div class="row g-1">
+        <div class="col-md-6">
+          <div class="form-floating">
+            <select class="form-select {% if form.grade.errors %} is-invalid {% endif %}" 
+              aria-label="grade select" name="grade" id="grade">
+                  <option selected>Open this select menu</option>
+                  {% for option in form.grade.choices %}
+                  <option value="{{ option[0] }}" 
+                   {% if form.grade.data == option[0] %} SELECTED {% endif %}>{{ option[1] }}</option>
+                 {% endfor %}  
+            </select>
+            {% if form.grade.errors %}
+              <div id="validationServer04Feedback" class="invalid-feedback">
+            {{ form.grade.errors[0]}}
+              </div>
+            {% endif %}
+            <label for="grade">Prediction Grade</label>
+          </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" class="form-control {% if form.user_prediction.errors %} is-invalid {% endif %}"
+               id="user_prediction" name="user_prediction"
+              {% if form.user_prediction.data is defined and form.user_prediction.data|length %}
+                value="{{form.user_prediction.data}}"
+              {% endif %}
+              placeholder="1000"
+            >
+              {% if form.user_prediction.errors %}
+              <div id="validationServer04Feedback" class="invalid-feedback">
+              {{ form.user_prediction.errors[0]}}
+              </div>
+              {% endif %}
+            <label for="user_prediction" class="form-label">What is your estimate?</label>
+          </div>
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <br/>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary">Submit your feedback</button>
+      </div>
   </form>
 
 </div>  

@@ -7,12 +7,18 @@
     <div class="w-100"></div>
     <div class="col-md-6">
         <div class="form-floating">
-          <select class="form-select" aria-label="action target select" name="action_target" id="action_target">
+          <select class="form-select {% if form.action_target.errors%} is-invalid {% endif %}" 
+            aria-label="action target select" name="action_target" id="action_target">
                 <option selected>Open this select menu</option>
-                {% for action_target,action_label in actions %}
-                <option value="{{action_target}}">{{action_label}}</option>
+                {% for option in form.action_target.choices %}
+                <option value="{{option[0]}}">{{option[1]}}</option>
                 {% endfor %}
           </select>
+          {% if form.action_target.errors %}
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            {{ form.action_target.errors[0]}}
+          </div>
+          {% endif %}
           <label for="action_target">Choose Action</label>
         </div>
       </div>
