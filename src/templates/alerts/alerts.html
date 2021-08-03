@@ -9,6 +9,7 @@
     <form class="form-floating" style="margin-left: 5%;margin-right: 5%;"
        action="/alerts/show_table/{{table_name}}" method="GET">
        <div class="row g-1">
+        <h5>Presenting {{ "{:,}".format(limit) }} rows out of {{ "{:,}".format(size) }} rows</h5>
         <div class="w-100"></div>
         <div class="col-lg-auto">
          {{data_table.to_html(index=False, classes=["table-bordered", "table-striped", "table-hover"]) | safe}}
